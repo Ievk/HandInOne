@@ -18,14 +18,20 @@ public class TicketMachine
     // The total amount of money collected by this machine.
     private int total;
 
+    // Task2 New private field of type String
+
+    private String venue;
+
     /**
      * Create a machine that issues tickets of the given price.
      */
-    public TicketMachine(int cost)
+    public TicketMachine(int price, String venue) //have to write in constructor the same amount of parameters
     {
-        price = cost;
-        balance = 0;
-        total = 0;
+       //initializing the private fields (task2)
+        this.price = price;
+        this.venue= venue;
+        this.balance = 0;
+        this.total = 0;
     }
 
     /**
@@ -65,28 +71,28 @@ public class TicketMachine
      * reduce the current balance by the ticket price. Print
      * an error message if more money is required.
      */
-    public void printTicket()
+
+    // Task 3
+
+    public Ticket printTicket()
     {
         if(balance >= price) {
-            // Simulate the printing of a ticket.
-            System.out.println("##################");
-            System.out.println("# The BlueJ Line");
-            System.out.println("# Ticket");
-            System.out.println("# " + price + " cents.");
-            System.out.println("##################");
-            System.out.println();
 
+            Ticket dktTicket = new Ticket(price,venue);
             // Update the total collected with the price.
             total = total + price;
             // Reduce the balance by the price.
             balance = balance - price;
+            return  dktTicket;
+
         }
         else {
-            System.out.println("You must insert at least: " +
-                               (price - balance) + " more cents.");
+          return null;
                     
         }
     }
+
+
 
     /**
      * Return the money in the balance.
@@ -101,10 +107,11 @@ public class TicketMachine
     }
 
     public static void main(String[] args) {
-        TicketMachine machine = new TicketMachine(10);
+        TicketMachine machine = new TicketMachine(10,"Ieva's violin concert");
         machine.insertMoney(25);
         machine.printTicket();        
         machine.printTicket();        
-        machine.printTicket();        
+        machine.printTicket();
+
     }
 }
