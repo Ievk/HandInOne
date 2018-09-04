@@ -74,23 +74,63 @@ public class TicketMachine
 
     // Task 3
 
+
+
     public Ticket printTicket()
     {
+        Ticket dktTicket = null;
         if(balance >= price) {
 
-            Ticket dktTicket = new Ticket(price,venue);
+
+             dktTicket = new Ticket(venue, price);
 
             // Update the total collected with the price.
             total = total + price;
             // Reduce the balance by the price.
             balance = balance - price;
-            return  dktTicket;
-
         }
         else {
-          return null;
-                    
+            dktTicket = new Ticket(venue, price, -1);
+            System.out.println("You must insert at least: " +
+                    (price - balance) + " more cents.");
         }
+
+        if(dktTicket.isValid() == true) {
+            System.out.println(dktTicket);
+        }
+        return dktTicket;
+    }
+    //task 8
+    public Ticket printMultiRideTicket(int numRides)
+    {
+        Ticket dktTicket = null;
+        if(numRides > 0){
+            int totalPrice = price * numRides;
+
+            if(balance >= totalPrice) {
+
+
+                dktTicket = new Ticket(venue, price,numRides);
+
+                // Update the total collected with the price.
+                total = total + totalPrice;
+                // Reduce the balance by the price.
+                balance = balance - totalPrice;
+
+            }
+            else{
+                dktTicket = new Ticket(venue, price,-1); // -1 will make isValid return false
+                System.out.println("You must insert at least: " +
+                        (totalPrice - balance) + " more cents.");
+            }
+        }
+        else{
+            System.out.println("Cannot issue a multi-ride ticket for fewer than 1 rides!");
+        }
+        if(dktTicket.isValid() == true) {
+            System.out.println(dktTicket);
+        }
+        return dktTicket;
     }
 
 
@@ -108,11 +148,21 @@ public class TicketMachine
     }
 
     public static void main(String[] args) {
-        TicketMachine machine = new TicketMachine(10,"Ieva's violin concert");
-        machine.insertMoney(25);
-        machine.printTicket();        
-        machine.printTicket();        
+        TicketMachine machine = new TicketMachine(20,"Ieva's violin concert");
+        machine.insertMoney(50);
+        //machine.printTicket();
+        //machine.printTicket();
+       //machine.printTicket();
+
+//USED FOR TEST
         machine.printTicket();
+        machine.printTicket();
+        machine.printTicket();
+
+     //   Ticket newTicket = machine.printTicket();
+     //   Ticket newTicket = machine.printMultiRideTicket(10);
+     //   Ticket newTicket2 = machine.printMultiRideTicket(10);
+
 
     }
 }
