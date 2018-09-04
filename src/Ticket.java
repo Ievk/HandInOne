@@ -11,4 +11,22 @@ public class Ticket {
         this.price = price;
         this.venue = venue;
     }
+
+    //Task4
+    public String toString() {
+
+        String ticketString =
+        "##################" + System.lineSeparator() +
+        "# " + venue + System.lineSeparator() +
+        "# Ticket" + System.lineSeparator() +
+        "# " + price + " cents." +System.lineSeparator() +
+        "##################";
+
+        return ticketString;
+
+
+
+    }
+
+
 }
